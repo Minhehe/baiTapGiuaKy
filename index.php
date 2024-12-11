@@ -1,5 +1,5 @@
 <?php
-// Kết nối tới cơ sở dữ liệu
+
 $host = '127.0.0.1';
 $username = 'root';
 $password = '12345678';
@@ -11,13 +11,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Xử lý tìm kiếm
+//------------------------------- tìm kiếm-------------------------------//
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
-// Truy vấn danh sách sinh viên theo tên hoặc quê quán
+// --------------- tìm theo tên or quê quán ----------------------------//
 $sql = "SELECT * FROM table_Students WHERE fullname LIKE ? OR hometown LIKE ?";
 $stmt = $conn->prepare($sql);
 $searchTerm = "%" . $search . "%";
@@ -25,11 +25,11 @@ $stmt->bind_param('ss', $searchTerm, $searchTerm);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Chuyển đổi giới tính và trình độ học vấn
+//----------------------- giới tính -----------------------------------//
 function genderText($gender) {
     return $gender == 1 ? 'Nam' : 'Nữ';
 }
-
+//----------------------- học vấn -----------------------------------//
 function levelText($level) {
     switch ($level) {
         case 0: return 'Tiến sĩ';
@@ -41,7 +41,7 @@ function levelText($level) {
 
 // Hàm để định dạng ngày sinh theo dạng dd-mm-yyyy
 function formatDate($date) {
-    return date('d-m-Y', strtotime($date));  // Định dạng ngày thành dd-mm-yyyy
+    return date('d-m-Y', strtotime($date));  //dd-mm-yyyy
 }
 ?>
 
