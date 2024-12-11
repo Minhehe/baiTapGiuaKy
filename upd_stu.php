@@ -1,5 +1,5 @@
 <?php
-// Kết nối cơ sở dữ liệu
+
 $host = '127.0.0.1';
 $username = 'root';
 $password = '12345678';
@@ -20,7 +20,7 @@ $hometown = $_POST['hometown'];
 $level = $_POST['level'];
 $group_id = $_POST['group_id'];
 
-// Cập nhật dữ liệu vào bảng
+// upd dữ liệu vào bảng
 $sql = "UPDATE table_Students 
         SET fullname = '$fullname', dob = '$dob', gender = '$gender', hometown = '$hometown', 
             level = '$level', group_id = '$group_id' 
@@ -28,7 +28,7 @@ $sql = "UPDATE table_Students
 
 if ($conn->query($sql) === TRUE) {
     echo "Cập nhật sinh viên thành công!";
-    header("Location: index.php"); // Quay lại trang danh sách
+    header("Location: index.php"); 
 } else {
     echo "Lỗi: " . $sql . "<br>" . $conn->error;
 }
